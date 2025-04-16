@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Apontamento</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <style>
+        :root {
+            --cor-fundo-light: #FFF;
+            --cor-texto-light: #222;
+            --cor-fundo-dark: #222;
+            --cor-texto-dark: #FFF;
+            --cor-primaria: #6934db;
+            --espaco-pequeno: 8px;
+            --espaco-medio: 16px;
+            --espaco-grande: 24px;
+            --cor-input-dark: #686868;
+            --cor-input-texto-dark: #FFF;
+            --cor-input-light: #FFF;
+            --cor-input-texto-light: #000;
+        }
+
+        body {
+            background-color: var(--cor-fundo-light);
+            color: var(--cor-texto-light);
+        }
+
+        input,
+        textarea,
+        select {
+            background-color: var(--cor-input-light);
+            color: var(--cor-input-texto-light);
+            border: 1px solid var(--cor-texto-light);
+        }
+
+
+        @media(prefers-color-scheme: dark) {
+            body {
+                background-color: var(--cor-fundo-dark);
+                color: var(--cor-texto-dark);
+            }
+
+            input,
+            textarea,
+            select {
+                background-color: var(--cor-input-dark);
+                color: var(--cor-input-texto-dark);
+                border: 1px solid var(--cor-texto-dark);
+            }
+        }
+
+        .containerAula {
+            width: 60vw;
+            height: 100%px;
+            margin: var(--espaco-grande);
+            border: 4px;
+            border-style: solid;
+            border-radius: 20px;
+            border-color: var(--cor-primaria);
+            padding: var(--espaco-medio);
+        }
+
+        .exemploContainer {
+            width: 250px;
+            height: 300px;
+            background-color: #6934db;
+        }
+
+        @media(max-width: 768px) {
+            .exemploContainer {
+                width: 100%;
+                height: 300px;
+                background-color: #6934db;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="exemploContainer">
+
+    </div>
+    <form class="containerAula">
+        <h1 class="mb-4">Cadastro de Apontamento</h1>
+        <div class="col-4 mb-3">
+            <label for="idUsuario" class="form-label">ID Usuário</label>
+            <input type="text" class="form-control" id="idUsuario">
+        </div>
+        <div class="col-4 mb-3">
+            <label for="idItemProjetoCategoria" class="form-label">ID Item Projeto Categoria</label>
+            <input type="text" class="form-control" id="idItemProjetoCategoria">
+        </div>
+        <div class="col-4 mb-3">
+            <select class="form-select form-select">
+                <option selected>Cliente</option>
+                <option value="1">BRF</option>
+                <option value="2">Prati-Donaduzzi</option>
+                <option value="3">Fiasul</option>
+            </select>
+        </div>
+        <div class="col-4 mb-3">
+            <select class="form-select form-select">
+                <option selected>Categoria</option>
+                <option value="1">Desenvolvimento</option>
+                <option value="2">Infraestrutura</option>
+                <option value="3">Gestão de Projetos</option>
+            </select>
+        </div>
+        <div class="col-4 mb-3">
+            <label for="data" class="form-label">Data/Hora</label>
+            <input type="datetime-local" class="form-control" id="data" value="">
+        </div>
+        <div class="col-12 mb-3">
+            <label for="descricao" class="form-label">Descrição</label>
+            <textarea class="form-control" id="descricao" rows="3"></textarea>
+        </div>
+        <div class="col-4 mb-3">
+            <label class="form-label" for="projeto">Projeto</label>
+            <select class="form-select form-select" id="projeto">
+                <option selected>Projeto</option>
+                <option value="1">Projeto 1</option>
+                <option value="2">Projeto 2</option>
+                <option value="3">Projeto 3</option>
+            </select>
+        </div>
+        <div class="col-4 mb-3">
+            <label for="extra" class="form-label">Extra</label>
+            <select class="form-select form-select" name="extra">
+                <option value="1">Sim</option>
+                <option value="2">Não</option>
+            </select>
+        </div>
+        <div class="col-4 mb-3">
+            <label for="dataDeExclusao" class="form-label">Data de Exclusão</label>
+            <input type="datetime-local" class="form-control" id="dataDeExclusao" value="">
+        </div>
+        <div class="col-4 mb-3">
+            <label for="statusExtra" class="form-label">Status Extra</label>
+            <select class="form-select form-select" name="statusExtra">
+                <option value="1">Aprovado</option>
+                <option value="2">Reprovado</option>
+            </select>
+        </div>
+        <div class="col-12 mb-3 ">
+            <label for="respostaExtra" class="form-label">Resposta Extra</label>
+            <textarea class="form-control" id="respostaExtra" rows="4"></textarea>
+        </div>
+        <div class="col-12 mb-3">
+            <label for="observacao" class="form-label">Observação</label>
+            <textarea class="form-control" id="observacao" rows="4"></textarea>
+        </div>
+        <div class="form-check mb-3">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Garantia</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+</body>
+
+</html>
