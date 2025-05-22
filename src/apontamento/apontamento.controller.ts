@@ -18,17 +18,17 @@ export class ApontamentoController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.apontamentoService.findOne(id);
+  findOne(@Param('id') id: number) {
+    return this.apontamentoService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateApontamentoDto: UpdateApontamentoDto) {
-    return this.apontamentoService.update(id, updateApontamentoDto);
+  update(@Param('id') id: number, @Body() updateApontamentoDto: UpdateApontamentoDto) {
+    return this.apontamentoService.update(+id, updateApontamentoDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.apontamentoService.remove(id);
+  remove(@Param('id') id: number) {
+    return this.apontamentoService.remove(+id);
   }
 }

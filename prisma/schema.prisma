@@ -14,7 +14,7 @@ datasource db {
 }
 
 model apontamento {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
   id_usuario String
   id_categoria String
   id_cliente String
@@ -24,7 +24,7 @@ model apontamento {
   descricao String
   projeto String
   extra String
-  data_de_exclusao DateTime
+  data_de_exclusao DateTime?
   status_extra String
   resposta_extra String
   observacao String

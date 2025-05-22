@@ -9,7 +9,7 @@ export class Apontamento {
     descricao: string;
     projeto: string;
     extra: string;
-    data_de_exclusao: Date;
+    data_de_exclusao?: Date | null;
     status_extra: string;
     resposta_extra: string;
     observacao: string;

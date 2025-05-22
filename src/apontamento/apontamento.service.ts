@@ -10,7 +10,7 @@ export class ApontamentoService {
 
   }
 
-  private mapToEntity(apontamento: any): Apontamento{
+  private mapToEntity(apontamento: any): Apontamento {
     return {
       id: apontamento.id,
       id_usuario: apontamento.id_usuario,
@@ -29,15 +29,29 @@ export class ApontamentoService {
       garantia: apontamento.garantia
     }
   }
-  
+
   async create(createApontamentoDto: CreateApontamentoDto): Promise<Apontamento> {
+    const data = {
+      ...createApontamentoDto,
+      data_de_exclusao: createApontamentoDto.data_de_exclusao
+        ? new Date(createApontamentoDto.data_de_exclusao)
+        : null
+    };
+
     const apontamento = await this.prisma.apontamento.create({
-      data : createApontamentoDto
+      data: data
     });
+
     return this.mapToEntity(apontamento);
   }
 
-  async update(id: string, updateApontamentoDto: UpdateApontamentoDto): Promise<Apontamento> {
+  async update(id: number, updateApontamentoDto: UpdateApontamentoDto): Promise<Apontamento> {
+    const apontamentoExistente = await this.prisma.apontamento.findUnique({ where: { id } })
+
+    if (!apontamentoExistente) {
+      throw new NotFoundException(`Apontamento com ID ${id} não encontrado.`)
+    }
+
     const updatedApontamento = await this.prisma.apontamento.update({
       where: { id },
       data: updateApontamentoDto,
@@ -45,17 +59,17 @@ export class ApontamentoService {
     return this.mapToEntity(updatedApontamento);
   }
 
-  async findAll(): Promise<Apontamento[]>{
+  async findAll(): Promise<Apontamento[]> {
     const apontamento = await this.prisma.apontamento.findMany();
     return apontamento.map(apontamento => this.mapToEntity(apontamento));
   }
 
-  async findOne(id: string): Promise<Apontamento> {
+  async findOne(id: number): Promise<Apontamento> {
     const apontamento = await this.prisma.apontamento.findUnique({
       where: { id },
     });
 
-    if(!apontamento){
+    if (!apontamento) {
       throw new NotFoundException(`Apontamento com ${id} não encontrado!`)
     }
 
@@ -63,7 +77,7 @@ export class ApontamentoService {
   }
 
 
-  async remove(id: string): Promise<Apontamento> {
+  async remove(id: number): Promise<Apontamento> {
     const apontamento = await this.prisma.apontamento.delete({
       where: { id },
     })
