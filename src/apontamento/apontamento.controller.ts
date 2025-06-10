@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { ApontamentoService } from './apontamento.service';
 import { CreateApontamentoDto } from './dto/create-apontamento.dto';
 import { UpdateApontamentoDto } from './dto/update-apontamento.dto';
@@ -13,8 +13,13 @@ export class ApontamentoController {
   }
 
   @Get()
-  findAll() {
-    return this.apontamentoService.findAll();
+  findAll(
+    @Query('descricao') descricao?: string,
+    @Query('projeto') projeto?: string,
+    @Query('sort') sort: 'descricao' | 'projeto' = 'descricao',
+    @Query('order') order: 'asc' | 'desc' = 'asc'
+  ) {
+    return this.apontamentoService.findAll(descricao, projeto);
   }
 
   @Get(':id')

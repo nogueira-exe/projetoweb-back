@@ -3,6 +3,7 @@ import { CreateApontamentoDto } from './dto/create-apontamento.dto';
 import { UpdateApontamentoDto } from './dto/update-apontamento.dto';
 import { Apontamento } from './entities/apontamento.entity';
 import { PrismaService } from 'prisma/prisma.service';
+import { contains } from 'class-validator';
 
 @Injectable()
 export class ApontamentoService {
@@ -59,8 +60,21 @@ export class ApontamentoService {
     return this.mapToEntity(updatedApontamento);
   }
 
-  async findAll(): Promise<Apontamento[]> {
-    const apontamento = await this.prisma.apontamento.findMany();
+  async findAll(
+    descricao?: string, 
+    projeto?: string,
+    sort: 'descricao' | 'projeto' = 'descricao',
+    direction: 'asc' | 'desc' = 'asc'
+  ): Promise<Apontamento[]> {
+    const apontamento = await this.prisma.apontamento.findMany({
+      where: {
+        AND: [
+          descricao ? { descricao: { contains: descricao, mode: 'insensitive' } } : {},
+          projeto ? { projeto: { contains: projeto, mode: 'insensitive' } } : {},
+        ],
+      },
+      orderBy: { [sort]: direction },
+    });
     return apontamento.map(apontamento => this.mapToEntity(apontamento));
   }
 
